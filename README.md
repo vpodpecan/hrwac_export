@@ -9,6 +9,17 @@ Paragraphs are token-filtered according to the parameter settings and exported i
 
 The `read_corpus` function can be also used as an iterator over paragraph tokens from the selected hrWaC `.xml.gz` archive.
 
+#### Training paragraph embeddings
+The included script `train_doc2vec.py` can be used to train basic paragraph embeddings models (aka Doc2vec).
+
+For example, to train a 100 dimensional Doc2vec model for 15 epochs on the newly exported hrWaC 2.1 corpus in one-document-per-line format stored in a file `hrwac21.txt` the following command will train the model and save it into the file `hrwac21_doc2vec_d100.model`:
+
+```sh
+python train_doc2vec.py -m hrwac_doc2vec_d100.model -d 100 -e 15 hrwac21.txt
+```
+
+The exported embeddings model can be used in your code by loading it using Gensim function `gensim.models.doc2vec.Doc2Vec.load`.
+
 
 #### Requirements
 The code works with `python 3.4+` and requires the following python modules (see requirements.txt):
