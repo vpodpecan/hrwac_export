@@ -97,7 +97,7 @@ if __name__ == '__main__':
         exit(1)
     if args.web:
         base = 'https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1064'
-        archives = ['{}/hrWaC2.1.{:02d}.xml.gz'.format(base, i) for i in range(1,15)]
+        archives = ['{}/hrWaC2.1.{:02d}.xml.gz'.format(base, i) for i in range(1, 15)]
     elif args.folder:
         archives = sorted([entry.path for entry in os.scandir(args.folder) if entry.path.lower().endswith('.xml.gz')])
         if len(archives) == 0:

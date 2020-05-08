@@ -9,16 +9,23 @@ Paragraphs are token-filtered according to the parameter settings and exported i
 
 The `read_corpus` function can be also used as an iterator over paragraph tokens from the selected hrWaC `.xml.gz` archive.
 
-#### Training paragraph embeddings
-The included script `train_doc2vec.py` can be used to train basic paragraph embeddings models (aka Doc2vec).
+#### Training paragraph embeddings (aka Doc2Vec)
+The included script `train_doc2vec.py` can be used to train paragraph embeddings models.
 
-For example, to train a 100 dimensional Doc2vec model for 15 epochs on the newly exported hrWaC 2.1 corpus in one-document-per-line format stored in a file `hrwac21.txt` the following command will train the model and save it into the file `hrwac21_doc2vec_d100.model`:
+The default parameters are sensibly optimized for a corpus of this size. For example, to train a 300 dimensional Doc2vec model for 20 epochs on the newly exported hrWaC 2.1 corpus in one-tokenized-document-per-line format stored in a file `hrwac21.txt` the following command will train the model and save it into the file `hrwac21_d2v_d300.model`:
 
 ```sh
-python train_doc2vec.py -m hrwac_doc2vec_d100.model -d 100 -e 15 hrwac21.txt
+python train_doc2vec.py -o hrwac21_d2v_d300.model hrwac21.txt
 ```
 
-The exported embeddings model can be used in your code by loading it using Gensim function `gensim.models.doc2vec.Doc2Vec.load`.
+There are two parameters that control how to treat rare and frequent words:
+
+-   `min_count` causes to ignore all words with total frequency lower than this
+-   `sample` downsamples frequent words.
+
+Both are configured for large corpora: `min_count=20` instead of default `5` and `sample=1e-5` instead of default `1e-3`.
+
+The exported embeddings model can be used in your code by loading it using Gensim function [`Doc2Vec.load()`](https://radimrehurek.com/gensim/models/base_any2vec.html#gensim.models.base_any2vec.BaseAny2VecModel.load). When the model is loaded, you can use [`Doc2Vec.infer_vector()`](https://radimrehurek.com/gensim/models/doc2vec.html#gensim.models.doc2vec.Doc2Vec.infer_vector) to obtain an embedding of your tokenized document.
 
 
 #### Requirements

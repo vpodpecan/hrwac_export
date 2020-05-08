@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Read hrWaC2.1 .xml.gz archive and write a TaggedLineDocument output')
     parser.add_argument('-o', '--output', required=True, help='output model file name')
     parser.add_argument('-d', '--dimensions', type=int, default=300, help='dimensionality of the model')
-    parser.add_argument('-e', '--epochs', type=int, default=40, help='number of epochs')
+    parser.add_argument('-e', '--epochs', type=int, default=20, help='number of epochs')
     parser.add_argument('-m', '--mincount', type=int, default=20, help='ignores all words with total frequency lower than this')
     parser.add_argument('-s', '--sample', type=float, default=0.00001, help='the threshold for configuring which higher-frequency words are randomly downsampled, useful range is (0, 1e-5)')
     parser.add_argument('-c', '--cpu', type=int, default=psutil.cpu_count(logical=False), help='how many cores to use')
